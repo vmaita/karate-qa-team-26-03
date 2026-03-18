@@ -145,4 +145,12 @@ Feature:  Flujo Auth
       When method put
       Then status 200
 
-
+  @token-parameter
+  Scenario:  CP01 - Crear Token - OK
+    Given url 'https://restful-booker.herokuapp.com'
+    And path '/auth'
+    And request { username : #(user), password : #(pass) }
+    When method post
+    Then status 200
+    And response.token == '#string'
+    * def token = response.token
